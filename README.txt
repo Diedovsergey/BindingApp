@@ -1,0 +1,1 @@
+This app was created to demonstrate MVVM architrcture and some Forms features, like triggers and converters. 
