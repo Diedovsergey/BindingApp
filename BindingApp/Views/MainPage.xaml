@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BindingApp.Views.MainPage"
+             x:Name="Page"
+             Title="{Binding Title}">
+
+    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+        <Label Text="{Binding Text}" TextColor="Black">
+            <Label.Triggers>
+                <DataTrigger
+                    Binding="{Binding IsLightText}"
+                    TargetType="Label"
+                    Value="True">
+                    <Setter Property="TextColor" Value="Bisque" />
+                </DataTrigger>
+            </Label.Triggers>
+        </Label>
+        <ListView ItemsSource="{Binding Students}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Name}" />
+                            <Label Text="{Binding Email}" />
+                            <Label Text="{Binding Phone}" />
+                            <Button
+                                Command="{Binding Path=BindingContext.StudentChosenCommand, Source={x:Reference Name=Page}}"
+                                CommandParameter="{Binding .}"
+                                Text="Tap me" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Command="{Binding Path=ChangeColorCommand}" Text="Tap me" />
+    </StackLayout>
+
+</ContentPage>
